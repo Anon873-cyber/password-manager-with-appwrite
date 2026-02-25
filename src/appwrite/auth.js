@@ -1,19 +1,20 @@
 import { Client, Account, OAuthProvider } from "appwrite";
 import conf from "../conf/conf";
 
-class Appwrite {
-    clint;
+class AuthService {
+    client;
     account;
     constructor() {
         this.client = new Client()
             .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProjectName);
+            .setProject(conf.appwriteProjectId);
 
         this.account = new Account(this.client)
     }
 
     loginWithGoogle = async () => {
         try {
+            
             await this.account.createOAuth2Session({
                 provider: OAuthProvider.Google,
                 success: "http://localhost:5173/",
@@ -21,6 +22,7 @@ class Appwrite {
             })
         } catch (error) {
             console.error(error)
+            return null;
         }
     }
 
@@ -29,6 +31,7 @@ class Appwrite {
             await this.account.deleteSession('current')
         } catch (error) {
             console.error(error)
+            return null;
         }
     }
 
@@ -37,9 +40,15 @@ class Appwrite {
             return await this.account.get()
         } catch (error) {
             console.error(error)
+            return null;
         }
 
     }
 
 
 }
+
+const authService = new AuthService();
+// exporting new instence 
+export default authService
+
