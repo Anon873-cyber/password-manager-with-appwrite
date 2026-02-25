@@ -5,17 +5,19 @@ class Appwrite {
     clint;
     account;
     constructor() {
-        this.clint = new Client()
+        this.client = new Client()
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectName);
 
-        this.account = new Account(this.clint)
+        this.account = new Account(this.client)
     }
 
     loginWithGoogle = async () => {
         try {
-            await account.createOAuth2Session({
-                provider: OAuthProvider.Google
+            await this.account.createOAuth2Session({
+                provider: OAuthProvider.Google,
+                success: "http://localhost:5173/",
+                failure: "http://localhost:5173/login"
             })
         } catch (error) {
             console.error(error)
@@ -24,7 +26,7 @@ class Appwrite {
 
     logoutUser = async () => {
         try {
-            await account.deleteSession('current')
+            await this.account.deleteSession('current')
         } catch (error) {
             console.error(error)
         }
@@ -32,14 +34,12 @@ class Appwrite {
 
     getUser = async () => {
         try {
-            return await account.get()
+            return await this.account.get()
         } catch (error) {
             console.error(error)
         }
 
-
-
-
     }
+
 
 }
