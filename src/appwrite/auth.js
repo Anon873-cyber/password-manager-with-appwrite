@@ -2,20 +2,21 @@ import { Client, Account, OAuthProvider } from "appwrite";
 import conf from "../conf/conf";
 
 class AuthService {
-    client;
-    account;
+    #client;
+    #account;
     constructor() {
-        this.client = new Client()
+        
+        this.#client = new Client()
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId);
 
-        this.account = new Account(this.client)
+        this.#account = new Account(this.#client)
     }
 
     loginWithGoogle = async () => {
         try {
             
-            await this.account.createOAuth2Session({
+            await this.#account.createOAuth2Session({
                 provider: OAuthProvider.Google,
                 success: "http://localhost:5173/",
                 failure: "http://localhost:5173/login"
@@ -28,7 +29,7 @@ class AuthService {
 
     logoutUser = async () => {
         try {
-            await this.account.deleteSession('current')
+            await this.#account.deleteSession('current')
         } catch (error) {
             console.error(error)
             return null;
@@ -37,7 +38,7 @@ class AuthService {
 
     getUser = async () => {
         try {
-            return await this.account.get()
+            return await this.#account.get()
         } catch (error) {
             console.error(error)
             return null;
