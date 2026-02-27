@@ -1,7 +1,11 @@
 import React, { useState, forwardRef } from "react";
-import { Eye, EyeOff } from "lucide-react"; // install: npm install lucide-react
+import { Eye, EyeOff } from "lucide-react";
 
-const PasswordInput = forwardRef(({ label, className = "", ...props }, ref) => {
+
+
+
+const PasswordInput = forwardRef(({ label, className = "",placeholder, ...props }, ref) => {
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => {
@@ -21,6 +25,7 @@ const PasswordInput = forwardRef(({ label, className = "", ...props }, ref) => {
           ref={ref}
           type={showPassword ? "text" : "password"}
           className={`w-full px-3 py-2 pr-10 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+          placeholder={placeholder}
           {...props}
         />
 

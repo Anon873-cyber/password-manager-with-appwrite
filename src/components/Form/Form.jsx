@@ -1,45 +1,88 @@
 import React from 'react'
-import { useState } from 'react';
-import service from '../../appwrite/config';
-import {Input} from '../index.js'
+import { useForm } from 'react-hook-form'
+import service from '../../appwrite/config'
+import { Input, PasswordInput, Button } from '../index.js'
 
 const Form = ({ post }) => {
 
     const { register, handleSubmit } = useForm({
-
         defaultValues: {
-            siteName: post?.siteName || '',
+            siteName: post?.siteName||'',
             url: post?.url || '',
-            password: post?.password || '',
-            notes: post?.notes || ''
-
+            username: post?.username||'',
+            password: post?.password||'',
+            notes: post?.notes||''
         }
+    })
 
-    });
-
-    //handle submit function 
+    // submit function
     const submit = async (data) => {
 
-        if (post) {
-            await service.updatePassword(data.$id, { ...data })
-        } else {
-            await service.deletePassword(data.$id)
+        try {
+            if (post) {
+                // update existing password
+                await service.updatePassword(post.$id, data)
+            } else {
+                // create new password
+                await service.createPassword(data)
+            }
+
+        } catch (error) {
+            console.log(error)
         }
     }
 
     return (
 
-        <form onSubmit={handleSubmit(submit)} >
-            <div className='flex flex-wrap'>
-              <Input classname="" {...register("text",{required:true}) }  />
+        <form onSubmit={handleSubmit(submit)}>
 
+            <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
+
+                {/* Website URL */}
+                <Input
+                    text="text"
+                    placeholder="Enter site name"
+                    className="w-full border border-green-400 rounded-xl outline-none px-4 py-2.5 text-sm sm:text-base"
+                    {...register("siteName", { required: true })}
+                />
+
+                {/* Username + Password row */}
+                <div className="flex flex-col sm:flex-row gap-4">
+
+                    {/* Username */}
+                    <Input
+                        text="text"
+                        placeholder="Enter Username"
+                        className="flex-1 border border-green-400 rounded-xl outline-none px-4 py-2.5 text-sm sm:text-base"
+                        {...register("username", { required: true })}
+                    />
+
+                    {/* Password */}
+                    <PasswordInput
+                        placeholder="Enter password"
+                        className="flex-1"
+                        {...register("password", { required: true })}
+                    />
+
+                </div>
+
+                {/* notes */}
+                <Input
+                    text="text"
+                    placeholder="Enter notes"
+                    className="w-full border border-green-400 rounded-xl outline-none px-4 py-2.5 text-sm sm:text-base"
+                    {...register("notes", { required: true })}
+                />
+
+                {/* Submit button */}
+                <Button type="submit" classname="bg-green-600 text-nowrap font-medium border border-green-950">
+                    {post ? "Update Password" : "Save Password"}
+                </Button>
 
             </div>
+
         </form>
     )
 }
 
 export default Form
-
-
-
