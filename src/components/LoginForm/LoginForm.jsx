@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import service from '../../appwrite/config.js'
+import authService from '../../appwrite/auth.js'
 import { Input, PasswordInput, Button } from '../index.js'
 
 const LoginForm = () => {
@@ -35,7 +36,7 @@ const LoginForm = () => {
 
         try {
 
-            service.loginWithGoogle()
+          authService.loginWithGoogle()
 
         } catch (error) {
 
@@ -49,7 +50,7 @@ const LoginForm = () => {
 
         <form onSubmit={handleSubmit(login)}>
 
-            <div className="w-full max-w-md mx-auto flex flex-col gap-4">
+            <div className="w-full max-w-md mx-auto flex flex-col gap-4 ">
 
                 <h1 className="text-2xl font-semibold text-center">
                     Login
@@ -59,14 +60,14 @@ const LoginForm = () => {
                 <Input
                     type="email"
                     placeholder="Enter email"
-                    className="w-full border border-green-400 rounded-xl px-4 py-2.5"
+                    className="w-full border border-green-400 rounded-xl px-4 py-2.5 bg-white outline-none "
                     {...register("email", { required: true })}
                 />
 
                 {/* Password */}
                 <PasswordInput
                     placeholder="Enter password"
-                    className="w-full"
+                    className="w-full  bg-white outline-none border  border-green-400"
                     {...register("password", { required: true })}
                 />
 

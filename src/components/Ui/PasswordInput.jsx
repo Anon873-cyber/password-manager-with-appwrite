@@ -22,7 +22,7 @@ const PasswordInput = forwardRef(({ label, className = "", placeholder, ...props
         <input
           ref={ref}
           type={showPassword ? "text" : "password"}
-          className={`w-full px-3 py-2 pr-10 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+          className={`w-full px-3 py-2 pr-10  rounded-xl outline-none  ${className}`}
           placeholder={placeholder}
           {...props}
         />
