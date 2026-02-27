@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import Form from './components/Form/Form'
+
 import './App.css'
+import LoginForm from './components/LoginForm/LoginForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,7 +9,7 @@ function App() {
 
   return (
     <>
-     <Form/>
+    <LoginForm/>
     </>
   )
 }

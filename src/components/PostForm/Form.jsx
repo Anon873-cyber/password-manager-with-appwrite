@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import service from '../../appwrite/config'
+import service from '../../appwrite/config.js'
 import { Input,PasswordInput, Button } from '../index.js'
 
 const Form = ({ post }) => {
@@ -19,6 +19,7 @@ const Form = ({ post }) => {
     const submit = async (data) => {
 
         try {
+
             if (post) {
                 // update existing password
                 await service.updatePassword(post.$id, data)
@@ -44,7 +45,7 @@ const Form = ({ post }) => {
                     text="text"
                     placeholder="Enter site name"
                     className="w-full border border-green-400 rounded-xl outline-none px-4 py-2.5 text-sm sm:text-base"
-                    {...register("siteName", { required: true })}
+                    {...register("url", { required: true })}
                 /> 
                 {/* Username + Password row */}
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -59,9 +60,9 @@ const Form = ({ post }) => {
 
                     {/* Password */}
                      <PasswordInput
-                        placeholder="Enter password"
-                        className="flex-1"
-                        {...register("password", { required: true })} 
+                         placeholder="Enter password"
+                         className="flex-1"
+                         {...register("password", { required: true })} 
                      /> 
 
                 </div>
@@ -75,7 +76,7 @@ const Form = ({ post }) => {
                 /> 
 
                 {/* Submit button */}
-                 <Button type="submit" classname="bg-green-600 text-nowrap font-medium border border-green-950">
+                 <Button type="submit" classname="bg-green-600 text-nowrap font-medium border border-green-950 rounded-xl p-2">
                     {post ? "Update Password" : "Save Password"}
                 </Button>
 
