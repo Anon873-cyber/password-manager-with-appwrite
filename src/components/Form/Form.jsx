@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import service from '../../appwrite/config';
+import {Input} from '../index.js'
 
 const Form = ({ post }) => {
 
@@ -30,6 +31,8 @@ const Form = ({ post }) => {
 
         <form onSubmit={handleSubmit(submit)} >
             <div className='flex flex-wrap'>
+              <Input classname="" {...register("text",{required:true}) }  />
+
 
             </div>
         </form>

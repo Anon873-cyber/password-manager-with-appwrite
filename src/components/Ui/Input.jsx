@@ -11,3 +11,4 @@ const Input = ({ label, text="text", className, ...props }, ref) => {
 }
 
 export default forwardRef(Input)
+
