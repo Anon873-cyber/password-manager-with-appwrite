@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import "./index.css";
 
 // pages
-//import Home from "./pages/Home.jsx";
+import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 //import Signup from "./pages/Signup.jsx";
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Login/>,
+        element: <Home/>,
       },
       {
         path: "/login",
