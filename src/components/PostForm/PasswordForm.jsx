@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import service from '../../appwrite/config.js'
 import { Input,PasswordInput, Button } from '../index.js'
 
-const Form = ({ post }) => {
+const PasswordForm = ({ post }) => {
 
     const { register, handleSubmit } = useForm({
         defaultValues: {
@@ -86,4 +86,4 @@ const Form = ({ post }) => {
     )
 }
 
-export default Form
+export default PasswordForm
