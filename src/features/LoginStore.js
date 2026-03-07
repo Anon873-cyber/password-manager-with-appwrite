@@ -6,7 +6,7 @@ const loginStore = create((set) => ({
     userData: null,
     login: (userData) =>
         set({ loginStatus: true, userData: userData }),
-    LogOut: () =>
+    Logout: () =>
         set({ loginStatus: false, userData: null }),
 
 }));

@@ -36,7 +36,7 @@ class AuthService {
         }
     }
 
-    getUser = async () => {
+    getCurrentUser = async () => {
         try {
             return await this.#account.get()
         } catch (error) {
