@@ -33,14 +33,16 @@ function App() {
   }, [])
 
   return !loading ? (
-    <div className='h-screen'>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
-  ) : null
+  <div className="min-h-screen flex flex-col">
+    <Header />
+
+    <main className="grow">
+      <Outlet />
+    </main>
+
+    <Footer />
+  </div>
+) : null
 }
 
 export default App

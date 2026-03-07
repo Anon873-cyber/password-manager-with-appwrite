@@ -1,5 +1,5 @@
 import React from "react";
-import { Continer } from "./../../index.js";
+import { Container } from "./../../index.js";
 import { NavLink } from "react-router-dom";
 import loginStore from "../../../features/LoginStore";
 
@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <nav className="w-full bg-[#0b2a3a] text-white shadow">
-      <Continer>
+      <Container>
         <div className="flex items-center justify-between py-3">
 
           {/* Logo */}
@@ -69,7 +69,7 @@ const Header = () => {
           </ul>
 
         </div>
-      </Continer>
+      </Container>
     </nav>
   );
 };

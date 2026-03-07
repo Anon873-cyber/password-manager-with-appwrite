@@ -50,31 +50,32 @@ const LoginForm = () => {
 
         <form onSubmit={handleSubmit(login)}>
 
-            <div className="w-full max-w-md mx-auto flex flex-col gap-4 ">
+            <div className="w-full max-w-4xl  h-72  flex flex-col  gap-4 m-auto ">
 
-                <h1 className="text-2xl font-semibold text-center">
-                    Login
+                <h1 className=" text-center font-bold text-5xl py-7">
+                    
+                  Login
                 </h1>
 
                 {/* Email */}
                 <Input
                     type="email"
                     placeholder="Enter email"
-                    className="w-full border border-green-400 rounded-xl px-4 py-2.5 bg-white outline-none "
+                    className="w-full border border-green-400 rounded-xl px-4 py-4 bg-white outline-none "
                     {...register("email", { required: true })}
                 />
 
                 {/* Password */}
                 <PasswordInput
                     placeholder="Enter password"
-                    className="w-full  bg-white outline-none border  border-green-400"
+                    className="w-full  bg-white outline-none border px-4 py-4 border-green-400"
                     {...register("password", { required: true })}
                 />
 
                 {/* Login Button */}
                 <Button
                     type="submit"
-                    className="bg-green-600 text-white rounded-xl p-2  flex justify-center items-center"
+                    className="bg-green-600 text-white rounded-xl px-4 py-4 flex justify-center items-center"
                     icon={
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +124,7 @@ const LoginForm = () => {
                 </Button>
 
                 {/* Divider */}
-                <div className="text-center text-sm text-gray-500">
+                <div className="text-center text-sm text-gray-500 ">
                     OR
                 </div>
 
@@ -131,7 +132,7 @@ const LoginForm = () => {
                 {/* Google Login */}
                 <Button
                     type="button"
-                    className="bg-white border border-gray-400 rounded-xl p-2"
+                    className="bg-white border border-gray-400 rounded-xl px-4 py-4"
 
                     onClick={googleLogin}
 
