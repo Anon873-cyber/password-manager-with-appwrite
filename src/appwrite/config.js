@@ -5,6 +5,7 @@ import { Client, ID, TablesDB, } from "appwrite"
 class Service {
     client;
     tablesDB;
+
     constructor() {
         this.client = new Client()
             .setEndpoint(conf.appwriteUrl)
@@ -29,15 +30,15 @@ class Service {
         }
 
     }
-    
-    updatePassword = async (rowId,{ siteName, password, username, url, notes }) => { 
-       
+
+    updatePassword = async (rowId, { siteName, password, username, url, notes }) => {
+
         try {
             return await this.tablesDB.updateRow({
-                databaseId:conf.appwriteDatabaseId,
-                tableId:conf.appwriteCollectionId,
-                rowId:rowId,
-                data:{
+                databaseId: conf.appwriteDatabaseId,
+                tableId: conf.appwriteCollectionId,
+                rowId: rowId,
+                data: {
                     siteName,
                     password,
                     username,
@@ -45,29 +46,38 @@ class Service {
                     notes
                 }
             })
-            
+
         } catch (error) {
             console.log(error)
             return null
         }
- }
-
-   deletePassword = async (rowId) => {
-    try {
-        const response = await this.tablesDB.deleteRow({
-            databaseId: conf.appwriteDatabaseId,
-            tableId: conf.appwriteCollectionId,
-            rowId: rowId
-        });
-
-        return response;
-
-    } catch (error) {
-        console.log(error);
-        return null;
     }
-}
 
+    deletePassword = async (rowId) => {
+        try {
+            const response = await this.tablesDB.deleteRow({
+                databaseId: conf.appwriteDatabaseId,
+                tableId: conf.appwriteCollectionId,
+                rowId: rowId
+            });
+
+            return response;
+
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+
+    }
+
+    getpasswords = async () => {
+        try {
+            const response = await this.tablesDB.listRows()
+            return response;
+        } catch (error) {
+            console.error("Error fetching passwords:", error);
+        }
+    }
 
 }
 

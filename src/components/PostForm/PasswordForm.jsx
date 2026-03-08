@@ -25,7 +25,8 @@ const PasswordForm = ({ post }) => {
                 await service.updatePassword(post.$id, data)
             } else {
                 // create new password
-                await service.createPassword(data)
+                const status = await service.createPassword(data)
+                console.log(status)
             }
 
         } catch (error) {
@@ -38,7 +39,7 @@ const PasswordForm = ({ post }) => {
         <form onSubmit={handleSubmit(submit)}>
 
             <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
-                <h1>sdsdsdsadasdsadsa</h1>
+        
 
                 {/* Website URL */}
                <Input
