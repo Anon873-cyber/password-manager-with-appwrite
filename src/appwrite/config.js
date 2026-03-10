@@ -70,9 +70,9 @@ class Service {
 
     }
 
-    getpasswords = async () => {
+    getpasswords = async (DbId) => {
         try {
-            const response = await this.tablesDB.listRows()
+            const response = await this.tablesDB.listRows(DbId)
             return response;
         } catch (error) {
             console.error("Error fetching passwords:", error);

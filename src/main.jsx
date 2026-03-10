@@ -9,7 +9,7 @@ import "./index.css";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 //import Signup from "./pages/Signup.jsx";
-
+import AuthLayout from "./components/Auth/AuthLayout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home/>,
+        element:(
+          <AuthLayout authentication={true}>
+             {" "}
+            <Home/>
+          </AuthLayout>
+          
+        ),
       },
       {
         path: "/login",
