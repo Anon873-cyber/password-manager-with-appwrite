@@ -1,84 +1,87 @@
 import conf from "../conf/conf.js"
-import { Client, ID, TablesDB, } from "appwrite"
-
+import { Client, ID, Databases, Storage, Query } from "appwrite"
 
 class Service {
     client;
-    tablesDB;
+    databases;
 
     constructor() {
-        this.client = new Client()
+        this.client
             .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteProjectId);
+            .setProject(conf.appwriteProjectId)
 
-        this.tablesDB = new TablesDB(this.client)
+        this.databases = new Databases(this.client)
+        this.bucket = new Storage(this.client)
     }
 
-    addPassword = async ({ siteName, password, username, url, notes }) => {
+    createPassword = async ({ siteName, password, username, url, notes }) => {
         try {
-            return await this.tablesDB.createRow({
-                databaseId: conf.appwriteDatabaseId,
-                tableId: conf.appwriteCollectionId,
-                rowId: ID.unique(),
-                data: {
-                    siteName, password, username, url, notes
-                }
-            })
-        } catch (error) {
-            console.log(error)
-            return null
-        }
-
-    }
-
-    updatePassword = async (rowId, { siteName, password, username, url, notes }) => {
-
-        try {
-            return await this.tablesDB.updateRow({
-                databaseId: conf.appwriteDatabaseId,
-                tableId: conf.appwriteCollectionId,
-                rowId: rowId,
-                data: {
+            return await this.databases.createDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                ID.unique(),
+                {
                     siteName,
                     password,
                     username,
                     url,
                     notes
                 }
-            })
-
+            )
         } catch (error) {
             console.log(error)
             return null
         }
     }
 
-    deletePassword = async (rowId) => {
+    updatePassword = async (documentId, { siteName, password, username, url, notes }) => {
         try {
-            const response = await this.tablesDB.deleteRow({
-                databaseId: conf.appwriteDatabaseId,
-                tableId: conf.appwriteCollectionId,
-                rowId: rowId
-            });
-
-            return response;
-
+            return await this.databases.updateDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                documentId,
+                {
+                    siteName,
+                    password,
+                    username,
+                    url,
+                    notes
+                }
+            )
         } catch (error) {
-            console.log(error);
-            return null;
-        }
-
-    }
-
-    getpasswords = async (DbId) => {
-        try {
-            const response = await this.tablesDB.listRows(DbId)
-            return response;
-        } catch (error) {
-            console.error("Error fetching passwords:", error);
+            console.log(error)
+            return null
         }
     }
 
+    deletePassword = async (documentId) => {
+        try {
+            const response = await this.databases.deleteDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                documentId
+            )
+
+            return response
+        } catch (error) {
+            console.log(error)
+            return null
+        }
+    }
+
+    getpasswords = async () => {
+        try {
+            const response = await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId
+            )
+
+            return response.documents
+        } catch (error) {
+            console.error("Error fetching passwords:", error)
+            return []
+        }
+    }
 }
 
 const service = new Service()

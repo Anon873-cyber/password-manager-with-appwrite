@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import PasswordForm from '../components/PostForm/PasswordForm'
 import service from '../appwrite/config'
+import conf from '../conf/conf'
 
 function Home() {
   const [passwords, setPasswords] = useState([])
 
   useEffect(() => {
-    const response = service.getpasswords()    
-    if (response) {
-      setPasswords(passwords)
-    }
+    service.getpasswords(conf.appwriteDatabaseId).then((response) => {
+      if (response) {
+        console.log(response)
+        setPasswords(passwords)
+      }
+    })
 
   }, [])
 
@@ -25,9 +28,9 @@ function Home() {
 
         <ul>
           {passwords.map((item, index) => (
-          <div>
-           <p></p>
-          </div>
+            <div>
+              <p>item</p>
+            </div>
           ))}
         </ul>
       )}
