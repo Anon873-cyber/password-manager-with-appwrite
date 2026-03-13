@@ -77,7 +77,7 @@ const PasswordForm = ({ post }) => {
                 /> 
 
                 {/* Submit button */}
-                 <Button type="submit" classname="bg-green-600 text-nowrap font-medium border border-green-950 rounded-xl p-2">
+                 <Button type="submit" className="bg-green-600 text-nowrap font-medium border border-green-950 rounded-xl p-2">
                     {post ? "Update Password" : "Save Password"}
                 </Button>
 

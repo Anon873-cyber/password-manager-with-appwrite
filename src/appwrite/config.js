@@ -2,7 +2,7 @@ import conf from "../conf/conf.js"
 import { Client, ID, Databases, Storage, Query } from "appwrite"
 
 class Service {
-    client;
+    client = new Client();
     databases;
 
     constructor() {
@@ -15,6 +15,7 @@ class Service {
     }
 
     createPassword = async ({ siteName, password, username, url, notes }) => {
+        console.log(siteName,password,url,username,notes)
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -25,7 +26,8 @@ class Service {
                     password,
                     username,
                     url,
-                    notes
+                    notes,
+                      lastUpdated: new Date().toISOString()
                 }
             )
         } catch (error) {
@@ -73,7 +75,7 @@ class Service {
         try {
             const response = await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
-                conf.appwriteCollectionId
+              conf.appwriteCollectionId
             )
 
             return response.documents
