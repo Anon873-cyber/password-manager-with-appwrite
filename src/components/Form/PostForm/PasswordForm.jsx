@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import service from '../../appwrite/config.js'
-import { Input,PasswordInput, Button } from '../index.js'
+import service from '../../../appwrite/config.js'
+import { Input,PasswordInput, Button } from '../../index.js'
 
 const PasswordForm = ({ post }) => {
 

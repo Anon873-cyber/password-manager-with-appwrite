@@ -1,9 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import service from '../../appwrite/config.js'
-import authService from '../../appwrite/auth.js'
-import { Input, PasswordInput, Button } from '../index.js'
-import loginStore from '../../features/LoginStore.js'
+import service from '../../../appwrite/config.js'
+import authService from '../../../appwrite/auth.js'
+import { Input, PasswordInput, Button } from '../../index.js'
+import loginStore from '../../../features/LoginStore.js'
 
 const LoginForm = () => {
 
