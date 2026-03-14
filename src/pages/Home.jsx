@@ -9,33 +9,61 @@ function Home() {
   useEffect(() => {
     service.getpasswords(conf.appwriteDatabaseId).then((response) => {
       if (response) {
-        console.log(response)
-        setPasswords(passwords)
+        setPasswords(response)
       }
     })
-
   }, [])
 
+  useEffect(() => {
+
+    console.log(passwords, "state")
+
+  }, [passwords])
+
+
   return (
-    <div>
-      <PasswordForm />
+  <div>
+    <PasswordForm />
 
-      <h2>Your Previous Passwords</h2>
+    <h2 className="text-xl font-bold mb-4 text-center">
+      Your Previous Passwords
+    </h2>
 
-      {passwords.length === 0 ? (
-        <p>No saved passwords</p>
-      ) : (
+    {passwords.length === 0 ? (
+      <p className="text-center">No saved passwords</p>
+    ) : (
+      <table className="w-full table-fixed text-left">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="p-3">Site</th>
+            <th className="p-3">Username</th>
+            <th className="p-3">Password</th>
+            <th className="p-3">URL</th>
+          </tr>
+        </thead>
 
-        <ul>
-          {passwords.map((item, index) => (
-            <div>
-              <p>item</p>
-            </div>
+        <tbody>
+          {passwords.map((item) => (
+            <tr key={item.$id} className="hover:bg-gray-50">
+              <td className="p-3 truncate">{item.siteName || "—"}</td>
+              <td className="p-3 truncate">{item.username}</td>
+              <td className="p-3 truncate">{item.password}</td>
+              <td className="p-3 truncate">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  {item.url}
+                </a>
+              </td>
+            </tr>
           ))}
-        </ul>
-      )}
-    </div>
-  )
+        </tbody>
+      </table>
+    )}
+  </div>
+);
 }
-
 export default Home
