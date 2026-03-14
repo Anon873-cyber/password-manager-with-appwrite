@@ -14,11 +14,6 @@ function Home() {
     })
   }, [])
 
-  useEffect(() => {
-
-    console.log(passwords, "state")
-
-  }, [passwords])
 
 
   return (
